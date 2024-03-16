@@ -4,7 +4,8 @@ var drum_map = new Array(127)
 var varkit=0
 var a = Date.now()
 var b = a
-fs.readdir("C:/Program Files/open-stage-control/Drum maps", (err, files) => {
+var drumMapsPath = "D:/install/open-stage-control_1.26.1_win32-x64/OpenStageControlRC600/DrumMaps"
+fs.readdir(drumMapsPath, (err, files) => {
     menu_drummaps= new Array() ;
     if (err) 
         console.error(err);
@@ -83,7 +84,7 @@ for (let i=0;i<128;i++)
             args[1].value = drum_map[(args[1].value)]
            } 
         if (address === '/file') {
-                args[0].value = "Drum maps/" + args[0].value
+                args[0].value = drumMapsPath + "/" + args[0].value
                 fs.readFile(args[0].value, 'utf8' , (err, data) => {
                 if (err) {
                     console.error(err)
