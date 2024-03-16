@@ -39,7 +39,7 @@
     "target": "",
     "ignoreDefaults": false,
     "bypass": false,
-    "onCreate": "setVar(\"script_1\",\"rc\",\"midi:RC600\")\nsend ('127.0.0.1:8080','/knock_knock')\nsetVar (\"script_1\",'cpt',0)\nset (\"input_1\",\" \"); \nset ('textarea_19',1)\nset ('Program change',40) \n",
+    "onCreate": "setVar(\"script_1\",\"rc\",\"midi:RC600\")\nsend ('127.0.0.1:8080','/knock_knock')\nsetVar (\"script_1\",'cpt',0)\nset (\"inputTempoSaisi\",\" \"); \nset ('textarea_19',1)\nset ('Program change',40) \n",
     "onValue": "setVar (\"menu_1\",\"menus\",value)\n\n\n\n",
     "widgets": [
       {
@@ -205,7 +205,7 @@
               {
                 "type": "input",
                 "lock": false,
-                "id": "input_1",
+                "id": "inputTempoSaisi",
                 "comments": "",
                 "value": "",
                 "default": " ",
@@ -289,14 +289,14 @@
                 "ignoreDefaults": true,
                 "bypass": true,
                 "onCreate": "",
-                "onValue": "// noprotect\nvar tempo =(get(\"input_1\"))\nif (tempo !== \" \") \n{\n//setVar (\"script_1\",\"rc\",\" \")\nsetVar (\"this\",\"byp\",'false')\nsetVar (\"Envoi tempo par F8\",\"byp\",'false')\nsetVar (\"Tap tempo manuel\",\"byp\",'false')\nsetVar (\"fader_1\",\"byp\",'false')\nset (\"textarea_3\",\" \")\nvar delai = 60000/(tempo)\nvar start = window.performance.now()\nlet b = start\n\ncchange()\n\nwhile ((b-start) < delai)  \n    { b = window.performance.now()}\n\ncchange()\nsetTimeout(majtemp,2000)\n}\n\nfunction majtemp() \n{\n //setVar (\"script_1\",\"rc\",\"midi:RC600\")\n setVar (\"script_1\",'cpt',0)\n setVar (\"this\",\"byp\",'true');\n setVar (\"Envoi tempo par F8\",\"byp\",'true')\n setVar (\"Tap tempo manuel\",\"byp\",'true')\n setVar (\"fader_1\",\"byp\",'true')\n set (\"input_1\",\" \")\n}\n\n\nfunction cchange()\n {\n  send ('midi:RC600','/sysex','B5','1C','7F')\n }\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+                "onValue": "// noprotect\nvar tempo =(get(\"inputTempoSaisi\"))\nif (tempo !== \" \") \n{\n//setVar (\"script_1\",\"rc\",\" \")\nsetVar (\"this\",\"byp\",'false')\nsetVar (\"Envoi tempo par F8\",\"byp\",'false')\nsetVar (\"Tap tempo manuel\",\"byp\",'false')\nsetVar (\"fader_1\",\"byp\",'false')\nset (\"txtTempoMesure\",\" \")\nvar delai = 60000/(tempo)\nvar start = window.performance.now()\nlet b = start\n\ncchange()\n\nwhile ((b-start) < delai)  \n    { b = window.performance.now()}\n\ncchange()\nsetTimeout(majtemp,2000)\n}\n\nfunction majtemp() \n{\n //setVar (\"script_1\",\"rc\",\"midi:RC600\")\n setVar (\"script_1\",'cpt',0)\n setVar (\"this\",\"byp\",'true');\n setVar (\"Envoi tempo par F8\",\"byp\",'true')\n setVar (\"Tap tempo manuel\",\"byp\",'true')\n setVar (\"fader_1\",\"byp\",'true')\n set (\"inputTempoSaisi\",\" \")\n}\n\n\nfunction cchange()\n {\n  send ('midi:RC600','/sysex','B5','1C','7F')\n }\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
               },
               {
                 "type": "textarea",
                 "top": 120,
                 "left": 650,
                 "lock": false,
-                "id": "textarea_3",
+                "id": "txtTempoMesure",
                 "visible": true,
                 "interaction": false,
                 "comments": "",
@@ -363,7 +363,7 @@
                 "ignoreDefaults": true,
                 "bypass": true,
                 "onCreate": "",
-                "onValue": "//noprotect\nvar tempo =(get(\"input_1\"))\nif (tempo !== \" \") \n{\nsetVar (\"script_1\",\"rc\",\" \")\nsetVar (\"this\",\"byp\",'false');\nsetVar (\"Envoi tempo par tap\",\"byp\",'false')\nsetVar (\"Tap tempo manuel\",\"byp\",'false')\nsetVar (\"fader_1\",\"byp\",'false')\nset (\"textarea_3\",' ')\nvar delai = 60000/(24*tempo)\nvar start = window.performance.now()\nvar b=start\nfor (let i = 1; i < 25; i++)\n  {\n  send ('midi:RC600','/sysex','f8')\n  while ((b-start) < delai*i)  \n  {var b = window.performance.now()}\n  }\n   setVar (\"script_1\",'cpt',0)\n   setTimeout(majtemp,2000)\n}\n\n\nfunction majtemp() \n{\n  setVar (\"script_1\",\"rc\",\"midi:RC600\")  \n  setVar (\"this\",\"byp\",'true');\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Tap tempo manuel\",\"byp\",'true')\n  setVar (\"fader_1\",\"byp\",'true')\n  set (\"input_1\",\" \")\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+                "onValue": "//noprotect\nvar tempo =(get(\"inputTempoSaisi\"))\nif (tempo !== \" \") \n{\nsetVar (\"script_1\",\"rc\",\" \")\nsetVar (\"this\",\"byp\",'false');\nsetVar (\"Envoi tempo par tap\",\"byp\",'false')\nsetVar (\"Tap tempo manuel\",\"byp\",'false')\nsetVar (\"fader_1\",\"byp\",'false')\nset (\"txtTempoMesure\",' ')\nvar delai = 60000/(24*tempo)\nvar start = window.performance.now()\nvar b=start\nfor (let i = 1; i < 25; i++)\n  {\n  send ('midi:RC600','/sysex','f8')\n  while ((b-start) < delai*i)  \n  {var b = window.performance.now()}\n  }\n   setVar (\"script_1\",'cpt',0)\n   setTimeout(majtemp,2000)\n}\n\n\nfunction majtemp() \n{\n  setVar (\"script_1\",\"rc\",\"midi:RC600\")  \n  setVar (\"this\",\"byp\",'true');\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Tap tempo manuel\",\"byp\",'true')\n  setVar (\"fader_1\",\"byp\",'true')\n  set (\"inputTempoSaisi\",\" \")\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "colorTextOn": "auto",
                 "label": "auto",
                 "vertical": false,
@@ -455,7 +455,7 @@
                 "ignoreDefaults": false,
                 "bypass": false,
                 "onCreate": "let a = window.performance.now()\nsetVar(\"this\",\"seconde\",a)",
-                "onValue": "send ('midi:RC600','/sysex','B5','1C','7F')\nlet b = window.performance.now()\nlet a=getVar(\"this\",\"seconde\") \nif ((b-a) < 1500)\n {\n   //setVar (\"script_1\",\"rc\",\" \")\n   setVar ('this','byp','false')\n   setVar (\"Envoi tempo par tap\",\"byp\",'false')\n   setVar (\"Envoi tempo par F8\",\"byp\",'false')\n   setVar (\"fader_1\",\"byp\",'false')\n   set (\"textarea_3\",' ')\n   setTimeout (majtemp,2000)\n   \n    }\nsetVar(\"this\",\"seconde\",b)\n\nfunction majtemp()\n{\n  //setVar (\"script_1\",\"rc\",\"midi:RC600\")  \n  setVar (\"script_1\",'cpt',0)\n  setVar (\"this\",\"byp\",'true');\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Envoi tempo par F8\",\"byp\",'true')\n  setVar (\"fader_1\",\"byp\",'true')\n  set (\"input_1\",\" \") \n}"
+                "onValue": "send ('midi:RC600','/sysex','B5','1C','7F')\nlet b = window.performance.now()\nlet a=getVar(\"this\",\"seconde\") \nif ((b-a) < 1500)\n {\n   //setVar (\"script_1\",\"rc\",\" \")\n   setVar ('this','byp','false')\n   setVar (\"Envoi tempo par tap\",\"byp\",'false')\n   setVar (\"Envoi tempo par F8\",\"byp\",'false')\n   setVar (\"fader_1\",\"byp\",'false')\n   set (\"txtTempoMesure\",' ')\n   setTimeout (majtemp,2000)\n   \n    }\nsetVar(\"this\",\"seconde\",b)\n\nfunction majtemp()\n{\n  //setVar (\"script_1\",\"rc\",\"midi:RC600\")  \n  setVar (\"script_1\",'cpt',0)\n  setVar (\"this\",\"byp\",'true');\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Envoi tempo par F8\",\"byp\",'true')\n  setVar (\"fader_1\",\"byp\",'true')\n  set (\"inputTempoSaisi\",\" \") \n}"
               },
               {
                 "type": "script",
@@ -473,7 +473,7 @@
                 "ignoreDefaults": false,
                 "bypass": false,
                 "onCreate": " set (\"script_2\",0)\n setVar (\"script_1\",\"rc\",\"midi:RC600\")\n  let a = window.performance.now()\n  setVar(\"this\",\"seconde\",a)\n  setVar(\"this\",\"cpt\",0)",
-                "onValue": "if (value==='f8')\n{\n let a = window.performance.now();\n setVar(\"this\",\"horloge\",a)\n let i = getVar(\"this\",\"cpt\")\n if (i===1)\n  {\n  setVar (\"this\",\"deb1\",getVar (\"this\",\"horloge\") )\n  }\n\n  if (i> 1)\n    {\n    var deb=getVar(\"this\",\"deb1\")\n    var fin = getVar(\"this\",\"horloge\")\n    setVar(\"this\",\"nouveau\",Math.round(60000*(getVar(\"this\",\"cpt\")-1)/(24*(fin-deb))*10)/10);  \n    }\n  \n  if (getVar('this','allume')==='true')\n  {\n    if (getVar('this','demarre')==='true')\n  {\n  setVar ('this','x',1)\n  setVar('this','y',0) \n  setVar('this','demarre','false')\n  setVar ('led_1',\"couleur\",'#ee063d')\n  set ('led_1',1) \n  }\n  let z=getVar('this','y')+1\n  setVar('this','y',z)\n  if (z ===25)\n   {\n   let h = getVar('this','x')+1\n   \n    if (h===5)\n      {\n      setVar('this','x',1)\n      setVar ('led_1',\"couleur\",'#ee063d')\n      }\n      else\n      {\n      setVar ('led_1',\"couleur\",'#14c52d')\n      setVar('this','x',h)\n      }\n    set ('led_1',1)\n    setVar('this','y',1)\n    }\n  \n    \n  }\n  \nif ((a-getVar(\"this\",\"seconde\") > 1500) &&(i>48) )\n  {\n     setVar(\"this\",\"seconde\",a);\n     maj_temp()\n  }    \nsetVar (\"this\",\"cpt\",i+1);\n\n}\n\nfunction maj_temp() \n{\n    set (\"textarea_3\",getVar(\"this\",\"nouveau\"));\n}\n\n\n",
+                "onValue": "if (value==='f8')\n{\n let a = window.performance.now();\n setVar(\"this\",\"horloge\",a)\n let i = getVar(\"this\",\"cpt\")\n if (i===1)\n  {\n  setVar (\"this\",\"deb1\",getVar (\"this\",\"horloge\") )\n  }\n\n  if (i> 1)\n    {\n    var deb=getVar(\"this\",\"deb1\")\n    var fin = getVar(\"this\",\"horloge\")\n    setVar(\"this\",\"nouveau\",Math.round(60000*(getVar(\"this\",\"cpt\")-1)/(24*(fin-deb))*10)/10);  \n    }\n  \n  if (getVar('this','allume')==='true')\n  {\n    if (getVar('this','demarre')==='true')\n  {\n  setVar ('this','x',1)\n  setVar('this','y',0) \n  setVar('this','demarre','false')\n  setVar ('led_1',\"couleur\",'#ee063d')\n  set ('led_1',1) \n  }\n  let z=getVar('this','y')+1\n  setVar('this','y',z)\n  if (z ===25)\n   {\n   let h = getVar('this','x')+1\n   \n    if (h===5)\n      {\n      setVar('this','x',1)\n      setVar ('led_1',\"couleur\",'#ee063d')\n      }\n      else\n      {\n      setVar ('led_1',\"couleur\",'#14c52d')\n      setVar('this','x',h)\n      }\n    set ('led_1',1)\n    setVar('this','y',1)\n    }\n  \n    \n  }\n  \nif ((a-getVar(\"this\",\"seconde\") > 1500) &&(i>48) )\n  {\n     setVar(\"this\",\"seconde\",a);\n     maj_temp()\n  }    \nsetVar (\"this\",\"cpt\",i+1);\n\n}\n\nfunction maj_temp() \n{\n    set (\"txtTempoMesure\",getVar(\"this\",\"nouveau\"));\n}\n\n\n",
                 "onKeyboard": "",
                 "keyBinding": "",
                 "keyRepeat": true,
@@ -1220,7 +1220,7 @@
                 "preArgs": "",
                 "target": "",
                 "onCreate": "",
-                "onValue": "\nvar tempo = get('textarea_3')\nvar delai = 60000/(24*tempo)\n//send ('127.0.0.1:8080','/gotempo',value,tempo)\nset ('active_temp',[value,delai])\nsend ('midi:RC600','/sysex','B5','49','7F')\nif (value ===1)\n{\n  //set ('led_1',1)\n  setVar (\"script_1\",\"rc\",\" \")\n  setVar (\"Envoi tempo par F8\",\"byp\",false)\n  setVar (\"Envoi tempo par tap\",\"byp\",false)\n  setVar (\"Tap tempo manuel\",\"byp\",false)\n  set (\"textarea_3\",tempo)\n  send ('midi:RC600','/sysex','fa')\n}\nelse\n{\n   send ('midi:RC600','/sysex','fc');\n   set ('textarea_3',' ')\n   setTimeout(majtemp,2000)\n}\n\nsetVar (\"script_1\",'cpt',0)\nfunction majtemp() \n{\n  setVar (\"script_1\",\"rc\",\"midi:RC600\")\n \n  let a = window.performance.now()\n  //setVar(\"script_3\",\"seconde\",a)\n  setVar (\"Tap tempo manuel\",\"byp\",true)\n  setVar (\"Envoi tempo par F8\",\"byp\",true);\n  setVar (\"Envoi tempo par tap\",\"byp\",true)\n  set (\"input_1\",\" \")\n}",
+                "onValue": "\nvar tempo = get('txtTempoMesure')\nvar delai = 60000/(24*tempo)\n//send ('127.0.0.1:8080','/gotempo',value,tempo)\nset ('active_temp',[value,delai])\nsend ('midi:RC600','/sysex','B5','49','7F')\nif (value ===1)\n{\n  //set ('led_1',1)\n  setVar (\"script_1\",\"rc\",\" \")\n  setVar (\"Envoi tempo par F8\",\"byp\",false)\n  setVar (\"Envoi tempo par tap\",\"byp\",false)\n  setVar (\"Tap tempo manuel\",\"byp\",false)\n  set (\"txtTempoMesure\",tempo)\n  send ('midi:RC600','/sysex','fa')\n}\nelse\n{\n   send ('midi:RC600','/sysex','fc');\n   set ('txtTempoMesure',' ')\n   setTimeout(majtemp,2000)\n}\n\nsetVar (\"script_1\",'cpt',0)\nfunction majtemp() \n{\n  setVar (\"script_1\",\"rc\",\"midi:RC600\")\n \n  let a = window.performance.now()\n  //setVar(\"script_3\",\"seconde\",a)\n  setVar (\"Tap tempo manuel\",\"byp\",true)\n  setVar (\"Envoi tempo par F8\",\"byp\",true);\n  setVar (\"Envoi tempo par tap\",\"byp\",true)\n  set (\"inputTempoSaisi\",\" \")\n}",
                 "interaction": true,
                 "typeTags": "",
                 "decimals": 2,
@@ -1412,7 +1412,7 @@
                 "ignoreDefaults": false,
                 "bypass": false,
                 "onCreate": "",
-                "onValue": "set ('textarea_2',Math.round(value)) \nlet b = window.performance.now()\nset (\"textarea_3\",' ')\n   setVar (\"script_3\",\"rc2\",\" \")\n   setTimeout (majtemp,2000)\n   setVar(\"this\",\"seconde\",b)\nfunction majtemp()\n{\n  setVar (\"script_3\",\"rc2\",\"midi:RC600\")\n  set (\"script_2\",0)\n  let a = window.performance.now()\n  setVar(\"script_3\",\"seconde\",a)\n}\n",
+                "onValue": "set ('textarea_2',Math.round(value)) \nlet b = window.performance.now()\nset (\"txtTempoMesure\",' ')\n   setVar (\"script_3\",\"rc2\",\" \")\n   setTimeout (majtemp,2000)\n   setVar(\"this\",\"seconde\",b)\nfunction majtemp()\n{\n  setVar (\"script_3\",\"rc2\",\"midi:RC600\")\n  set (\"script_2\",0)\n  let a = window.performance.now()\n  setVar(\"script_3\",\"seconde\",a)\n}\n",
                 "onTouch": "\n"
               },
               {
@@ -1434,7 +1434,7 @@
                 "ignoreDefaults": false,
                 "bypass": false,
                 "onCreate": "",
-                "onValue": "set ('textarea_4',Math.round(value)+70) \nset (\"textarea_3\",' ')\n   //setVar (\"script_1\",\"rc\",\" \")\n   setVar ('Tap tempo manuel','byp','false')\n   setVar (\"Envoi tempo par tap\",\"byp\",'false')\n   setVar (\"Envoi tempo par F8\",\"byp\",'false')\n   \n   setTimeout (majtemp,2000)\n\nfunction majtemp()\n{\n  setVar ('script_1','cpt',0)\n  setVar ('Tap tempo manuel','byp','true')\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Envoi tempo par F8\",\"byp\",'true')\n}",
+                "onValue": "set ('textarea_4',Math.round(value)+70) \nset (\"txtTempoMesure\",' ')\n   //setVar (\"script_1\",\"rc\",\" \")\n   setVar ('Tap tempo manuel','byp','false')\n   setVar (\"Envoi tempo par tap\",\"byp\",'false')\n   setVar (\"Envoi tempo par F8\",\"byp\",'false')\n   \n   setTimeout (majtemp,2000)\n\nfunction majtemp()\n{\n  setVar ('script_1','cpt',0)\n  setVar ('Tap tempo manuel','byp','true')\n  setVar (\"Envoi tempo par tap\",\"byp\",'true')\n  setVar (\"Envoi tempo par F8\",\"byp\",'true')\n}",
                 "visible": true,
                 "interaction": "VAR{byp}",
                 "left": 250,
